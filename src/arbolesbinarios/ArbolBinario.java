@@ -46,16 +46,16 @@ public class ArbolBinario {
     public void InsertarMenor(char c){
         Nodo p = Raiz.getLigaIzq();
         Nodo x = new Nodo(c);
-        if (p == null) {
+         if (p == null) {
             Raiz.setLigaIzq(x);
         }else{
             Nodo a = p;
             while (p!=null) {
                 a = p;
                 if (p.getDato() < c) {
-                    p = p.getLigaIzq();
-                }else{
                     p = p.getLigaDer();
+                }else{
+                    p = p.getLigaIzq();
                 }
             }
             
