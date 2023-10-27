@@ -94,6 +94,27 @@ public class ArbolBinario {
         }
 
     }
+    public void Mostrarhojas(Nodo R){
+        if(R!=null){
+
+         if(R.getLigaIzq()== null && R.getLigaDer()==null){
+             JOptionPane.showMessageDialog(null, R.getDato());
+            }
+            Mostrarhojas(R.getLigaIzq());
+            Mostrarhojas(R.getLigaDer());
+        }
+    }
+        
+    public void Mostrarpadres(Nodo R){
+        if(R!=null){
+
+         if(R.getLigaIzq()== null && R.getLigaDer()==null){
+             JOptionPane.showMessageDialog(null, R.getDato());
+            }
+            Mostrarpadres(R.getLigaIzq());
+            Mostrarpadres(R.getLigaDer());
+        }
+    }
 
 
     public Nodo getRaiz() {
