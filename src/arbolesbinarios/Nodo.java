@@ -1,24 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package arbolesbinarios;
 
-/**
- *
- * @author abela
- */
+
 public class Nodo {
     
     private int dato;
     private Nodo LigaIzq, LigaDer;
     
-//metodos 
+    //metodos 
 
-    public Nodo(int dato, Nodo LigaIzq, Nodo LigaDer) {
+    public Nodo(int dato) {
         this.dato = dato;
-        this.LigaIzq = LigaIzq;
-        this.LigaDer = LigaDer;
+        this.LigaIzq = null;
+        this.LigaDer = null;
     }
 
     public int getDato() {
