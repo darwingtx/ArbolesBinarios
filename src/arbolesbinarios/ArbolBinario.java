@@ -69,14 +69,32 @@ public class ArbolBinario {
 
         }
     }
-    public void Recorrer(Nodo R){
+  
+     public void RecorrerPre(Nodo R){
         if(R!=null){
-            Recorrer(R.getLigaIzq());
-           JOptionPane.showMessageDialog(null, R.getDato());
-            Recorrer(R.getLigaDer());
+            JOptionPane.showMessageDialog(null, R.getDato());
+            RecorrerPre(R.getLigaIzq());
+            RecorrerPre(R.getLigaDer());
         }
 
     }
+      public void RecorrerIN(Nodo R){
+        if(R!=null){
+            RecorrerIN(R.getLigaIzq());
+           JOptionPane.showMessageDialog(null, R.getDato());
+            RecorrerIN(R.getLigaDer());
+        }
+
+    }
+     public void RecorrerPos(Nodo R){
+        if(R!=null){
+            RecorrerPos(R.getLigaIzq());
+            RecorrerPos(R.getLigaDer());
+             JOptionPane.showMessageDialog(null, R.getDato());
+        }
+
+    }
+
 
     public Nodo getRaiz() {
         return Raiz;
