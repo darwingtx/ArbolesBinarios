@@ -1,5 +1,7 @@
 package arbolesbinarios;
 
+import javax.swing.JOptionPane;
+
 public class ArbolBinario {
     
     private Nodo Raiz;
@@ -67,6 +69,21 @@ public class ArbolBinario {
 
         }
     }
+    public void Recorrer(Nodo R){
+        if(R!=null){
+            Recorrer(R.getLigaIzq());
+           JOptionPane.showMessageDialog(null, R.getDato());
+            Recorrer(R.getLigaDer());
+        }
 
+    }
+
+    public Nodo getRaiz() {
+        return Raiz;
+    }
+
+    public void setRaiz(Nodo raiz) {
+        Raiz = raiz;
+    }
 
 }

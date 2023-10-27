@@ -12,7 +12,7 @@ public class ArbolesBinarios {
         char vc[] = x.toCharArray();
         
         ArbolBinario p = new ArbolBinario(vc);
-
+        p.Recorrer(p.getRaiz());
         String l = "";
 
 
