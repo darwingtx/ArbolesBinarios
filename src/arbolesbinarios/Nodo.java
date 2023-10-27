@@ -10,6 +10,7 @@ public class Nodo {
     //metodos 
 
     public Nodo(char dato) {
+        
         this.dato = dato;
         this.LigaIzq = null;
         this.LigaDer = null;
