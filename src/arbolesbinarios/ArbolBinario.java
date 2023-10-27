@@ -4,14 +4,14 @@ public class ArbolBinario {
     
     private Nodo Raiz;
 
-    public ArbolBinario(char vs[]){
-        char mayor = vs[0];
+    public ArbolBinario(char vc[]){
+        char mayor = vc[0];
         Raiz = new Nodo(mayor);
 
-        for (char c : vs) {
-            if (mayor > c) {
+        for (char c : vc) {
+            if (mayor < c) {
                 InsertarMayor(c);
-            }else{
+            }else if(mayor>c){
                 InsertarMenor(c);
             }
         }
@@ -19,7 +19,53 @@ public class ArbolBinario {
     }
 
     public void InsertarMayor(char c){
+        Nodo p = Raiz.getLigaDer();
+        Nodo x = new Nodo(c);
+        if (p == null) {
+            Raiz.setLigaDer(x);
+        }else{
+            Nodo a = p;
+            while (p!=null) {
+                a = p;
+                if (p.getDato() > c) {
+                    p = p.getLigaIzq();
+                }else{
+                    p = p.getLigaDer();
+                }
+            }
+            
+            if (a.getDato()>c) {
+                a.setLigaIzq(x);
+            }else{
+                a.setLigaDer(x);
+            }
 
+        }
+    }
+
+    public void InsertarMenor(char c){
+        Nodo p = Raiz.getLigaIzq();
+        Nodo x = new Nodo(c);
+        if (p == null) {
+            Raiz.setLigaIzq(x);
+        }else{
+            Nodo a = p;
+            while (p!=null) {
+                a = p;
+                if (p.getDato() < c) {
+                    p = p.getLigaIzq();
+                }else{
+                    p = p.getLigaDer();
+                }
+            }
+            
+            if (a.getDato()>c) {
+                a.setLigaIzq(x);
+            }else{
+                a.setLigaDer(x);
+            }
+
+        }
     }
 
 

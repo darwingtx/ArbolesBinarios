@@ -4,22 +4,22 @@ package arbolesbinarios;
 
 public class Nodo {
     
-    private int dato;
+    private char dato;
     private Nodo LigaIzq, LigaDer;
     
     //metodos 
 
-    public Nodo(int dato) {
+    public Nodo(char dato) {
         this.dato = dato;
         this.LigaIzq = null;
         this.LigaDer = null;
     }
 
-    public int getDato() {
+    public char getDato() {
         return dato;
     }
 
-    public void setDato(int dato) {
+    public void setDato(char dato) {
         this.dato = dato;
     }
 
