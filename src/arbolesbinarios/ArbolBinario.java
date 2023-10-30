@@ -146,6 +146,28 @@ public class ArbolBinario {
         return s;
     }
 
+    public void MostrarArbol(Nodo R, int space, int alto){
+
+        if(R == null){
+            return;
+        }
+
+        space+=alto;
+
+        MostrarArbol(R.getLigaDer(), space, alto);
+        System.out.println();
+
+        for(int i = alto; i<space; i++){
+            System.out.print(" ");
+        }
+        System.out.println(R.getDato());
+
+        System.out.println();
+
+        MostrarArbol(R.getLigaIzq(), space, alto);
+    
+    }
+
     public int Altura(Nodo R) {
         int Altura = 0;
         if (R != null) {
