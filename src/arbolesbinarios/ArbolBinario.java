@@ -128,6 +128,24 @@ public class ArbolBinario {
         return s;
     }
 
+    public Nodo Hermano(Nodo R, Nodo P, Nodo s) {
+        if (R != null && P != null) {
+
+            if (R.getLigaDer() == P || R.getLigaIzq() == P) {
+                if (R.getLigaDer() == P) {
+                    s = R.getLigaIzq();
+                }else if(R.getLigaIzq() == P){
+                    s=R.getLigaDer();
+                }
+                
+            }
+            s = Padre(R.getLigaIzq(), P, s);
+            s = Padre(R.getLigaDer(), P, s);
+        }
+
+        return s;
+    }
+
     public int Altura(Nodo R) {
         int Altura = 0;
         if (R != null) {
