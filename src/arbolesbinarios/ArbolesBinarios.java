@@ -5,10 +5,7 @@ import javax.swing.JOptionPane;
 
 public class ArbolesBinarios {
 
-   
-    /**
-     * @param args
-     */
+
     public static void main(String[] args) {
         
         String x = JOptionPane.showInputDialog("Ingrese la cadena");

@@ -73,7 +73,6 @@ public class ArbolBinario {
     public String RecorrerPre(Nodo R) {
         String s = "";
         if (R != null) {
-            // JOptionPane.showMessageDialog(null, R.getDato());
             s += R.getDato();
             s += RecorrerPre(R.getLigaIzq());
             s += RecorrerPre(R.getLigaDer());
@@ -134,35 +133,34 @@ public class ArbolBinario {
         if (R != null) {
             Altura = Math.max(Altura, Altura(R.getLigaIzq()));
             Altura = Math.max(Altura, Altura(R.getLigaDer()));
-
             Altura++;
         }
 
         return Altura;
     }
-    public int Profundo(Nodo R){
-        Nodo p =null;
-        int deep=0;
-        if(R!=this.getRaiz()){
-            deep = 1+ Profundo(this.Padre(this.Raiz, R, p));
+
+    public int Profundo(Nodo R) {
+        Nodo p = null;
+        int deep = 0;
+        if (R != this.getRaiz()) {
+            deep = 1 + Profundo(this.Padre(this.Raiz, R, p));
         }
 
         return deep;
     }
-    public Nodo Padre(Nodo R, Nodo P,Nodo s){
-       if(R!=null && P!=null){
 
-       if(R.getLigaDer()== P || R.getLigaIzq()==P){
-        s = R;
-         }     
-        s = Padre(R.getLigaIzq(),P,s);
-        s = Padre(R.getLigaDer(),P,s);
-        }   
+    public Nodo Padre(Nodo R, Nodo P, Nodo s) {
+        if (R != null && P != null) {
+
+            if (R.getLigaDer() == P || R.getLigaIzq() == P) {
+                s = R;
+            }
+            s = Padre(R.getLigaIzq(), P, s);
+            s = Padre(R.getLigaDer(), P, s);
+        }
 
         return s;
     }
-
-
 
     public Nodo getRaiz() {
         return Raiz;
