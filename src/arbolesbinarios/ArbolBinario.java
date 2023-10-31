@@ -20,6 +20,14 @@ public class ArbolBinario {
 
     }
 
+    public void InsertarDato(char c){
+        if (this.Raiz.getDato() < c) {
+                InsertarMayor(c);
+            } else{
+                InsertarMenor(c);
+            }
+    }
+
     public void InsertarMayor(char c) {
         Nodo p = Raiz.getLigaDer();
         Nodo x = new Nodo(c);
