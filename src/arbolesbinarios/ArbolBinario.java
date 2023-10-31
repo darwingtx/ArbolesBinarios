@@ -77,13 +77,14 @@ public class ArbolBinario {
 
         }
     }
-
-    public String RecorrerPre(Nodo R) {
-        String s = "";
-        if (R != null) {
-            s += R.getDato();
-            s += RecorrerPre(R.getLigaIzq());
-            s += RecorrerPre(R.getLigaDer());
+  
+     public String  RecorrerPre(Nodo R){
+         String s="";
+        if(R!=null){
+            // JOptionPane.showMessageDialog(null, R.getDato());
+            s+=R.getDato();
+            s+=RecorrerPre(R.getLigaIzq());
+            s+=RecorrerPre(R.getLigaDer());
         }
 
         return s;
@@ -136,79 +137,6 @@ public class ArbolBinario {
         return s;
     }
 
-    public Nodo Hermano(Nodo R, Nodo P, Nodo s) {
-        if (R != null && P != null) {
-
-            if (R.getLigaDer() == P || R.getLigaIzq() == P) {
-                if (R.getLigaDer() == P) {
-                    s = R.getLigaIzq();
-                }else if(R.getLigaIzq() == P){
-                    s=R.getLigaDer();
-                }
-                
-            }
-            s = Padre(R.getLigaIzq(), P, s);
-            s = Padre(R.getLigaDer(), P, s);
-        }
-
-        return s;
-    }
-
-    public void MostrarArbol(Nodo R, int space, int alto){
-
-        if(R == null){
-            return;
-        }
-
-        space+=alto;
-
-        MostrarArbol(R.getLigaDer(), space, alto);
-        System.out.println();
-
-        for(int i = alto; i<space; i++){
-            System.out.print(" ");
-        }
-        System.out.println(R.getDato());
-
-        System.out.println();
-
-        MostrarArbol(R.getLigaIzq(), space, alto);
-    
-    }
-
-    public int Altura(Nodo R) {
-        int Altura = 0;
-        if (R != null) {
-            Altura = Math.max(Altura, Altura(R.getLigaIzq()));
-            Altura = Math.max(Altura, Altura(R.getLigaDer()));
-            Altura++;
-        }
-
-        return Altura;
-    }
-
-    public int Profundo(Nodo R) {
-        Nodo p = null;
-        int deep = 0;
-        if (R != this.getRaiz()) {
-            deep = 1 + Profundo(this.Padre(this.Raiz, R, p));
-        }
-
-        return deep;
-    }
-
-    public Nodo Padre(Nodo R, Nodo P, Nodo s) {
-        if (R != null && P != null) {
-
-            if (R.getLigaDer() == P || R.getLigaIzq() == P) {
-                s = R;
-            }
-            s = Padre(R.getLigaIzq(), P, s);
-            s = Padre(R.getLigaDer(), P, s);
-        }
-
-        return s;
-    }
 
     public Nodo getRaiz() {
         return Raiz;
