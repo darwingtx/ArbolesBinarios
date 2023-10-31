@@ -78,6 +78,29 @@ public class ArbolBinario {
         }
     }
   
+    public void MostrarArbol(Nodo R, int space, int alto){
+
+        if(R == null){
+            return;
+        }
+
+        space+=alto;
+
+        MostrarArbol(R.getLigaDer(), space, alto);
+        System.out.println();
+
+        for(int i = alto; i<space; i++){
+            System.out.print(" ");
+        }
+        System.out.println(R.getDato());
+
+        System.out.println();
+
+        MostrarArbol(R.getLigaIzq(), space, alto);
+
+    }
+    
+
      public String  RecorrerPre(Nodo R){
          String s="";
         if(R!=null){
