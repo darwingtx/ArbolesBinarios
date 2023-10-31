@@ -19,6 +19,39 @@ public class ArbolBinario {
         }
 
     }
+    public int Altura(Nodo R) {
+        int Altura = 0;
+        if (R != null) {
+            Altura = Math.max(Altura, Altura(R.getLigaIzq()));
+            Altura = Math.max(Altura, Altura(R.getLigaDer()));
+
+            Altura++;
+        }
+
+        return Altura;
+    }
+    public int Profundo(Nodo R){
+        Nodo p =null;
+        int deep=0;
+        if(R!=this.getRaiz()){
+            deep = 1+ Profundo(this.Padre(this.Raiz, R, p));
+        }
+
+        return deep;
+    }
+    public Nodo Padre(Nodo R, Nodo P,Nodo s){
+       if(R!=null && P!=null){
+
+       if(R.getLigaDer()== P || R.getLigaIzq()==P){
+        s = R;
+         }     
+        s = Padre(R.getLigaIzq(),P,s);
+        s = Padre(R.getLigaDer(),P,s);
+        }   
+
+        return s;
+    }
+
 
     public void InsertarDato(char c){
         if (this.Raiz.getDato() < c) {
@@ -134,28 +167,28 @@ public class ArbolBinario {
         return s;
     }
 
-    public String Mostrarhojas(Nodo R) {
-        String s = "";
+    public int Contarhojas(Nodo R) {
+        int s = 0;
         if (R != null) {
 
             if (R.getLigaIzq() == null && R.getLigaDer() == null) {
-                s += R.getDato();
+                s +=1;
             }
-            s += Mostrarhojas(R.getLigaIzq());
-            s += Mostrarhojas(R.getLigaDer());
+            s += Contarhojas(R.getLigaIzq());
+            s += Contarhojas(R.getLigaDer());
         }
         return s;
     }
 
-    public String Mostrarpadres(Nodo R) {
-        String s = "";
+    public int Contarpadres(Nodo R) {
+        int s = 0;
         if (R != null) {
 
             if (R.getLigaIzq() != null || R.getLigaDer() != null) {
-                s += R.getDato();
+                s +=1;
             }
-            s += Mostrarpadres(R.getLigaIzq());
-            s += Mostrarpadres(R.getLigaDer());
+            s += Contarpadres(R.getLigaIzq());
+            s += Contarpadres(R.getLigaDer());
         }
         return s;
     }

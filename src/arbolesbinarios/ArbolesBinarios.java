@@ -5,10 +5,6 @@ import javax.swing.JOptionPane;
 
 public class ArbolesBinarios {
 
-   
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
         
         String x = JOptionPane.showInputDialog("Ingrese la cadena");
@@ -16,21 +12,20 @@ public class ArbolesBinarios {
         String s="";
         ArbolBinario p = new ArbolBinario(vc);
         p.MostrarArbol(p.getRaiz(), 6, 10);
-
-    //       s= p.RecorrerPre(p.getRaiz());
-
+       
+     JOptionPane.showMessageDialog(null,  p.Contarpadres(p.getRaiz()));
+       // Nodo r=p.getRaiz().getLigaDer().getLigaDer().getLigaDer();
+     
+    //    s= p.RecorrerIN(p.getRaiz());
+    //    JOptionPane.showMessageDialog(null, s);
+        
        // s= p.RecorrerPre(p.getRaiz());
-
     //    JOptionPane.showMessageDialog(null, s);
     //    s= p.RecorrerPos(p.getRaiz());
     //      JOptionPane.showMessageDialog(null, s);
     //      s=p.Mostrarpadres(p.getRaiz());
     //      JOptionPane.showMessageDialog(null, s);
     //              s=p.Mostrarhojas(p.getRaiz());
-
-    //      JOptionPane.showMessageDialog(null, s);
-  
-   
          //JOptionPane.showMessageDialog(null, s);
        // Nodo r = p.getRaiz().getLigaIzq();
        // Nodo oo = new Nodo('x');
