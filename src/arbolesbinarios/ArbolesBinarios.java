@@ -12,8 +12,10 @@ public class ArbolesBinarios {
         String s="";
         ArbolBinario p = new ArbolBinario(vc);
         p.MostrarArbol(p.getRaiz(), 6, 10);
+
        
      JOptionPane.showMessageDialog(null,  p.MostrarAncestros(p.getRaiz().getLigaDer().getLigaDer().getLigaDer().getLigaIzq().getLigaDer()));
+     p.MostrarPrimosH(p.getRaiz().getLigaDer().getLigaDer());
        // Nodo r=p.getRaiz().getLigaDer().getLigaDer().getLigaDer();
      
     //    s= p.RecorrerIN(p.getRaiz());

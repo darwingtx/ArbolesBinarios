@@ -54,7 +54,65 @@ public class ArbolBinario {
 
         return s;
     }
+     public Nodo Hermano(Nodo R, Nodo P, Nodo s) {
+        if (R != null && P != null) {
 
+            if (R.getLigaDer() == P || R.getLigaIzq() == P) {
+                if (R.getLigaDer() == P) {
+                    s = R.getLigaIzq();
+                }else if(R.getLigaIzq() == P){
+                    s=R.getLigaDer();
+                }
+                
+            }
+            s = Padre(R.getLigaIzq(), P, s);
+            s = Padre(R.getLigaDer(), P, s);
+        }
+
+        return s;
+    }
+//p = papa de R
+    // public String MostrarPrimosH(Nodo RAIZ, Nodo R,Nodo P, int A){
+    //        String s="";
+    //        Nodo q=null;
+
+    //     if(R!=null){
+    //         if(Altura(R)==A && Padre(this.Raiz, R, q)!= P){
+    //             s+=R.getDato();
+    //         }
+    //         s+=MostrarPrimosH(RAIZ.getLigaIzq(),R,P,A);
+    //         s+=MostrarPrimosH(RAIZ.getLigaDer(),R,P,A);
+    //     }
+
+    //    return s; 
+      
+    // }
+    public void MostrarPrimosH(Nodo R){
+         Nodo q=null;
+         Nodo x= Padre(this.Raiz, R, q);
+        Nodo p= Padre(this.Raiz,x,q);
+        String s = "";
+        if(p.getLigaDer()!=null && p.getLigaDer()!=x){
+            p=p.getLigaDer();
+            if(p.getLigaIzq()!=null){
+                s+=p.getLigaIzq().getDato();
+            }
+            if(p.getLigaDer()!=null){
+                s+=p.getLigaDer().getDato();
+
+            }
+        } else if(p.getLigaIzq()!=null && p.getLigaIzq()!=x){
+                p=p.getLigaIzq();
+            if(p.getLigaIzq()!=null){
+                s+=p.getLigaIzq().getDato();
+            }
+            if(p.getLigaDer()!=null){
+                s+=p.getLigaDer().getDato();
+
+            }
+        }
+         JOptionPane.showMessageDialog(null, s);
+    }
 
     public void InsertarDato(char c){
         if (this.Raiz.getDato() < c) {
@@ -157,24 +215,6 @@ public class ArbolBinario {
             s += R.getDato();
             s += RecorrerIN(R.getLigaDer());
         }
-        return s;
-    }
-
-    public Nodo Hermano(Nodo R, Nodo P, Nodo s) {
-        if (R != null && P != null) {
-
-            if (R.getLigaDer() == P || R.getLigaIzq() == P) {
-                if (R.getLigaDer() == P) {
-                    s = R.getLigaIzq();
-                }else if(R.getLigaIzq() == P){
-                    s=R.getLigaDer();
-                }
-                
-            }
-            s = Padre(R.getLigaIzq(), P, s);
-            s = Padre(R.getLigaDer(), P, s);
-        }
-
         return s;
     }
 
