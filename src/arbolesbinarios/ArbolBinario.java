@@ -19,6 +19,7 @@ public class ArbolBinario {
         }
 
     }
+
     public int Altura(Nodo R) {
         int Altura = 0;
         if (R != null) {
@@ -30,6 +31,7 @@ public class ArbolBinario {
 
         return Altura;
     }
+
     public int Profundo(Nodo R){
         Nodo p =null;
         int deep=0;
@@ -39,6 +41,7 @@ public class ArbolBinario {
 
         return deep;
     }
+
     public Nodo Padre(Nodo R, Nodo P,Nodo s){
        if(R!=null && P!=null){
 
@@ -195,6 +198,19 @@ public class ArbolBinario {
             s += Contarhojas(R.getLigaIzq());
             s += Contarhojas(R.getLigaDer());
         }
+        return s;
+    }
+
+    public String MostrarAncestros(Nodo R){
+            String s = "";
+            Nodo p=R;
+            
+        while(p != this.Raiz){
+            p = this.Padre(this.Raiz, p, p);
+            s+=p.getDato();
+        }
+         
+
         return s;
     }
 
