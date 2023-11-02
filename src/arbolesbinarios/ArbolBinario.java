@@ -7,21 +7,27 @@ public class ArbolBinario {
     private Nodo Raiz;
 
     public ArbolBinario(char vc[]) {
-        char mayor = vc[0];
         for (char c : vc) {
             InsertarDato(c);
+            FactorB(Raiz);
+        }
+    }
+
+    private void FactorB(Nodo R) {
+        if (R != null) {
+            FactorB(R.getLigaDer());
+            FactorB(R.getLigaIzq());
+            R.setFb(Altura(R.getLigaIzq())  - Altura(R.getLigaDer()) );
         }
     }
 
     public int Altura(Nodo R) {
-        int Altura = 0;
+        int Altura = -1;
         if (R != null) {
             Altura = Math.max(Altura, Altura(R.getLigaIzq()));
             Altura = Math.max(Altura, Altura(R.getLigaDer()));
-
             Altura++;
         }
-
         return Altura;
     }
 
@@ -66,7 +72,7 @@ public class ArbolBinario {
         return s;
     }
 
-    public void MostrarPrimosH(Nodo R) {
+    public String MostrarPrimosH(Nodo R) {
         Nodo q = null;
         Nodo x = Padre(this.Raiz, R, q);
         Nodo p = Padre(this.Raiz, x, q);
@@ -90,7 +96,7 @@ public class ArbolBinario {
 
             }
         }
-        JOptionPane.showMessageDialog(null, s);
+        return s;
     }
 
     public void InsertarDato(char c) {
@@ -132,10 +138,9 @@ public class ArbolBinario {
     }
 
     public String RecorrerPre(Nodo R) {
-        String s = "";
+        String s = " ";
         if (R != null) {
-            // JOptionPane.showMessageDialog(null, R.getDato());
-            s += R.getDato();
+            s += R.getFb();
             s += RecorrerPre(R.getLigaIzq());
             s += RecorrerPre(R.getLigaDer());
         }
