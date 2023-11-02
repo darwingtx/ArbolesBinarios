@@ -14,7 +14,7 @@ public class ArbolesBinarios {
         p.MostrarArbol(p.getRaiz(), 6, 10);
 
        
-     JOptionPane.showMessageDialog(null,  p.MostrarAncestros(p.getRaiz().getLigaDer().getLigaDer().getLigaDer().getLigaIzq().getLigaDer()));
+   //  JOptionPane.showMessageDialog(null,  p.MostrarAncestros(p.getRaiz().getLigaDer().getLigaDer().getLigaDer().getLigaIzq().getLigaDer()));
      p.MostrarPrimosH(p.getRaiz().getLigaDer().getLigaDer());
        // Nodo r=p.getRaiz().getLigaDer().getLigaDer().getLigaDer();
      

@@ -157,9 +157,9 @@ public class ArbolBinario {
             while (p != null) {
                 a = p;
                 if (p.getDato() < c) {
-                    p = p.getLigaIzq();
-                } else {
                     p = p.getLigaDer();
+                } else {
+                    p = p.getLigaIzq();
                 }
             }
 
