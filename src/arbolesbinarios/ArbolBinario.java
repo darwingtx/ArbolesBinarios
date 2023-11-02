@@ -8,16 +8,9 @@ public class ArbolBinario {
 
     public ArbolBinario(char vc[]) {
         char mayor = vc[0];
-        Raiz = new Nodo(mayor);
-
         for (char c : vc) {
-            if (mayor < c) {
-                InsertarMayor(c);
-            } else if (mayor > c) {
-                InsertarMenor(c);
-            }
+            InsertarDato(c);
         }
-
     }
 
     public int Altura(Nodo R) {
@@ -101,61 +94,19 @@ public class ArbolBinario {
     }
 
     public void InsertarDato(char c) {
-        if (this.Raiz.getDato() < c) {
-            InsertarMayor(c);
-        } else {
-            InsertarMenor(c);
-        }
+        Raiz = insertarRecursivo(Raiz, c);
     }
 
-    public void InsertarMayor(char c) {
-        Nodo p = Raiz.getLigaDer();
-        Nodo x = new Nodo(c);
-        if (p == null) {
-            Raiz.setLigaDer(x);
-        } else {
-            Nodo a = p;
-            while (p != null) {
-                a = p;
-                if (p.getDato() > c) {
-                    p = p.getLigaIzq();
-                } else {
-                    p = p.getLigaDer();
-                }
-            }
-
-            if (a.getDato() > c) {
-                a.setLigaIzq(x);
-            } else {
-                a.setLigaDer(x);
-            }
-
+    private Nodo insertarRecursivo(Nodo R, char c) {
+        if (R == null) {
+            return new Nodo(c);
         }
-    }
-
-    public void InsertarMenor(char c) {
-        Nodo p = Raiz.getLigaIzq();
-        Nodo x = new Nodo(c);
-        if (p == null) {
-            Raiz.setLigaIzq(x);
+        if (c < R.getDato()) {
+            R.setLigaIzq(insertarRecursivo(R.getLigaIzq(), c));
         } else {
-            Nodo a = p;
-            while (p != null) {
-                a = p;
-                if (p.getDato() < c) {
-                    p = p.getLigaDer();
-                } else {
-                    p = p.getLigaIzq();
-                }
-            }
-
-            if (a.getDato() > c) {
-                a.setLigaIzq(x);
-            } else {
-                a.setLigaDer(x);
-            }
-
+            R.setLigaDer(insertarRecursivo(R.getLigaDer(), c));
         }
+        return R;
     }
 
     public void MostrarArbol(Nodo R, int space, int alto) {
@@ -206,20 +157,16 @@ public class ArbolBinario {
             return BuscarDato(R.getLigaDer(), dato);
         }
     }
+
     public Nodo Buscar(Nodo r, char d) {
         Nodo n = null;
-
-        if (r.getDato() < d)
-        {
+        if (r.getDato() < d) {
             n = Buscar(r.getLigaDer(), d);
-        } else if (r.getDato() > d)
-        {
+        } else if (r.getDato() > d) {
             n = Buscar(r.getLigaIzq(), d);
-        } else if (r.getDato() == d)
-        {
+        } else if (r.getDato() == d) {
             return r;
         }
-
         return n;
     }
 

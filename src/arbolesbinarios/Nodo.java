@@ -1,19 +1,20 @@
 
 package arbolesbinarios;
 
-
 public class Nodo {
-    
+
     private char dato;
     private Nodo LigaIzq, LigaDer;
-    
-    //metodos 
+    private int Fb;
+
+    // metodos
 
     public Nodo(char dato) {
-        
+
         this.dato = dato;
         this.LigaIzq = null;
         this.LigaDer = null;
+        this.Fb = 0;
     }
 
     public char getDato() {
@@ -40,9 +41,12 @@ public class Nodo {
         this.LigaDer = LigaDer;
     }
 
- 
-    
-    
- 
+    public int getFb() {
+        return Fb;
+    }
+
+    public void setFb(int fb) {
+        Fb = fb;
+    }
 
 }
