@@ -13,12 +13,112 @@ public class ArbolBinario {
         }
     }
 
+
+
     private void FactorB(Nodo R) {
         if (R != null) {
             FactorB(R.getLigaDer());
             FactorB(R.getLigaIzq());
-            R.setFb(Altura(R.getLigaIzq())  - Altura(R.getLigaDer()) );
+            R.setFb(Altura(R.getLigaIzq()) - Altura(R.getLigaDer()));
+            if (R.getFb() == 2 || R.getFb() == -2) {
+                if (Altura(R.getLigaDer()) > Altura(R.getLigaIzq())) {
+                    if (Altura(R.getLigaDer().getLigaDer()) > Altura(R.getLigaDer().getLigaIzq())) {
+                        AVL(R, R.getLigaDer(), R.getLigaDer().getLigaDer());
+                    } else {
+                        AVL(R, R.getLigaDer(), R.getLigaDer().getLigaIzq());
+                    }
+                } else {
+                    if (Altura(R.getLigaIzq().getLigaDer()) > Altura(R.getLigaIzq().getLigaIzq())) {
+                        AVL(R, R.getLigaIzq(), R.getLigaIzq().getLigaDer());
+                    } else {
+                        AVL(R, R.getLigaIzq(), R.getLigaIzq().getLigaIzq());
+                    }
+                }
+            }
         }
+    }
+
+    public void InsertarDato(char c) {
+        Raiz = insertarRecursivo(Raiz, c);
+    }
+
+    private Nodo insertarRecursivo(Nodo R, char c) {
+        if (R == null) {
+            return new Nodo(c);
+        }
+        if (c < R.getDato()) {
+            R.setLigaIzq(insertarRecursivo(R.getLigaIzq(), c));
+        } else {
+            R.setLigaDer(insertarRecursivo(R.getLigaDer(), c));
+        }
+        return R;
+    }
+
+    public void AVL(Nodo P, Nodo Q, Nodo R) {
+
+        if ((P.getFb() == 2 && Q.getFb() == 1) || (P.getFb() == -2 && Q.getFb() == -1)) {
+            if (P.getFb() == 2 && Q.getFb() == 1) {
+                SimpleRotationRight(P, Q);
+            } else if (P.getFb() == -2 && Q.getFb() == -1) {
+                SimpleRotationLeft(P, Q);
+            }
+        } else {
+
+            if (P.getFb() == -2 && Q.getFb() == 1) {
+                DoubleRotationLeft(P, Q, R);
+            } else if (P.getFb() == 2 && Q.getFb() == -1) {
+                DoubleRotationRight(P, Q, R);
+            }
+
+        }
+
+    }
+
+    private void SimpleRotationRight(Nodo P, Nodo Q) {
+        Nodo s = Padre(Raiz, P, null);
+        Nodo r = Q.getLigaDer();
+        if (s == null) {
+            Q.setLigaDer(P);
+            P.setLigaIzq(r);
+            Raiz = Q;
+        } else {
+
+            if (s.getLigaDer() == P) {
+                s.setLigaDer(Q);
+                ;
+            } else {
+                s.setLigaIzq(Q);
+            }
+            Q.setLigaIzq(P);
+            P.setLigaIzq(r);
+        }
+    }
+
+    private void SimpleRotationLeft(Nodo P, Nodo Q) {
+        Nodo s = Padre(Raiz, P, null);
+        Nodo r = Q.getLigaIzq();
+        if (s == null) {
+            P.setLigaDer(r);
+            Q.setLigaIzq(P);
+            Raiz = Q;
+        } else {
+
+            if (s.getLigaDer() == P) {
+                s.setLigaDer(Q);
+            } else {
+                s.setLigaIzq(Q);
+            }
+            Q.setLigaDer(P);
+            P.setLigaDer(r);
+        }
+    }
+
+    private void DoubleRotationRight(Nodo P, Nodo Q, Nodo R) {
+
+    }
+
+    private void DoubleRotationLeft(Nodo P, Nodo Q, Nodo R) {
+
     }
 
     public int Altura(Nodo R) {
@@ -27,6 +127,8 @@ public class ArbolBinario {
             Altura = Math.max(Altura, Altura(R.getLigaIzq()));
             Altura = Math.max(Altura, Altura(R.getLigaDer()));
             Altura++;
+        } else {
+            Altura = 0;
         }
         return Altura;
     }
@@ -99,42 +201,19 @@ public class ArbolBinario {
         return s;
     }
 
-    public void InsertarDato(char c) {
-        Raiz = insertarRecursivo(Raiz, c);
-    }
-
-    private Nodo insertarRecursivo(Nodo R, char c) {
-        if (R == null) {
-            return new Nodo(c);
-        }
-        if (c < R.getDato()) {
-            R.setLigaIzq(insertarRecursivo(R.getLigaIzq(), c));
-        } else {
-            R.setLigaDer(insertarRecursivo(R.getLigaDer(), c));
-        }
-        return R;
-    }
-
     public void MostrarArbol(Nodo R, int space, int alto) {
-
         if (R == null) {
             return;
         }
-
         space += alto;
-
         MostrarArbol(R.getLigaDer(), space, alto);
         System.out.println();
-
         for (int i = alto; i < space; i++) {
             System.out.print(" ");
         }
         System.out.println(R.getDato());
-
         System.out.println();
-
         MostrarArbol(R.getLigaIzq(), space, alto);
-
     }
 
     public String RecorrerPre(Nodo R) {
