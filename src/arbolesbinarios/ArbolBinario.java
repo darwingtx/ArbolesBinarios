@@ -10,15 +10,16 @@ public class ArbolBinario {
         for (char c : vc) {
             InsertarDato(c);
             FactorB(Raiz);
-            RecorrerFb(Raiz);
         }
     }
 
-    private void RecorrerFb(Nodo R) {
-        if (R != null) {
-            RecorrerFb(R.getLigaIzq());
-            RecorrerFb(R.getLigaDer());
 
+
+    private void FactorB(Nodo R) {
+        if (R != null) {
+            FactorB(R.getLigaDer());
+            FactorB(R.getLigaIzq());
+            R.setFb(Altura(R.getLigaIzq()) - Altura(R.getLigaDer()));
             if (R.getFb() == 2 || R.getFb() == -2) {
                 if (Altura(R.getLigaDer()) > Altura(R.getLigaIzq())) {
                     if (Altura(R.getLigaDer().getLigaDer()) > Altura(R.getLigaDer().getLigaIzq())) {
@@ -34,14 +35,6 @@ public class ArbolBinario {
                     }
                 }
             }
-        }
-    }
-
-    private void FactorB(Nodo R) {
-        if (R != null) {
-            FactorB(R.getLigaDer());
-            FactorB(R.getLigaIzq());
-            R.setFb(Altura(R.getLigaIzq()) - Altura(R.getLigaDer()));
         }
     }
 
