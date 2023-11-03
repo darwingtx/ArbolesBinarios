@@ -140,13 +140,32 @@ public class ArbolBinario {
     public String RecorrerPre(Nodo R) {
         String s = " ";
         if (R != null) {
-            s += R.getFb();
+            s += R.getDato();
             s += RecorrerPre(R.getLigaIzq());
             s += RecorrerPre(R.getLigaDer());
-        }
+        } 
 
         return s;
 
+    }
+       public String RecorrerIN(Nodo R) {
+        String s = "";
+        if (R != null) {
+            s += RecorrerIN(R.getLigaIzq());
+            s += R.getDato();
+            s += RecorrerIN(R.getLigaDer());
+        }
+        return s;
+    }
+
+    public String RecorrerPos(Nodo R) {
+        String s = "";
+        if (R != null) {
+            s += RecorrerPos(R.getLigaIzq());
+            s += RecorrerPos(R.getLigaDer());
+            s += R.getDato();
+        }
+        return s;
     }
 
     public boolean BuscarDato(Nodo R, char dato) {
@@ -175,25 +194,7 @@ public class ArbolBinario {
         return n;
     }
 
-    public String RecorrerIN(Nodo R) {
-        String s = "";
-        if (R != null) {
-            s += RecorrerIN(R.getLigaIzq());
-            s += R.getDato();
-            s += RecorrerIN(R.getLigaDer());
-        }
-        return s;
-    }
-
-    public String RecorrerPos(Nodo R) {
-        String s = "";
-        if (R != null) {
-            s += RecorrerPos(R.getLigaIzq());
-            s += RecorrerPos(R.getLigaDer());
-            s += R.getDato();
-        }
-        return s;
-    }
+ 
 
     public int Contarhojas(Nodo R) {
         int s = 0;
