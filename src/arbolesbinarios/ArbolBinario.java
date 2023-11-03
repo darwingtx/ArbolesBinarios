@@ -13,8 +13,6 @@ public class ArbolBinario {
         }
     }
 
-
-
     private void FactorB(Nodo R) {
         if (R != null) {
             FactorB(R.getLigaDer());
@@ -85,11 +83,11 @@ public class ArbolBinario {
 
             if (s.getLigaDer() == P) {
                 s.setLigaDer(Q);
-                ;
+                
             } else {
                 s.setLigaIzq(Q);
             }
-            Q.setLigaIzq(P);
+            Q.setLigaDer(P);
             P.setLigaIzq(r);
         }
     }
@@ -108,16 +106,48 @@ public class ArbolBinario {
             } else {
                 s.setLigaIzq(Q);
             }
-            Q.setLigaDer(P);
+            Q.setLigaIzq(P);
             P.setLigaDer(r);
         }
     }
 
     private void DoubleRotationRight(Nodo P, Nodo Q, Nodo R) {
+          Nodo s = Padre(Raiz, P, null);
+
+        P.setLigaIzq(R.getLigaDer());
+        R.setLigaDer(P);
+        Q.setLigaDer(R.getLigaIzq());
+        R.setLigaIzq(Q);
+        if (s != null) {
+            if (s.getLigaDer() == P) {
+                s.setLigaDer(R);
+            } else {
+                s.setLigaIzq(R);
+            }
+
+        } else {
+            Raiz = R;
+        }
 
     }
 
     private void DoubleRotationLeft(Nodo P, Nodo Q, Nodo R) {
+        Nodo s = Padre(Raiz, P, null);
+       
+        P.setLigaDer(R.getLigaIzq());
+        R.setLigaIzq(P);
+        Q.setLigaIzq(R.getLigaDer());
+        R.setLigaDer(Q);
+        if (s != null) {
+            if (s.getLigaDer() == P) {
+                s.setLigaDer(R);
+            } else {
+                s.setLigaIzq(R);
+            }
+
+        } else {
+            Raiz = R;
+        }
 
     }
 
@@ -222,12 +252,13 @@ public class ArbolBinario {
             s += R.getDato();
             s += RecorrerPre(R.getLigaIzq());
             s += RecorrerPre(R.getLigaDer());
-        } 
+        }
 
         return s;
 
     }
-       public String RecorrerIN(Nodo R) {
+
+    public String RecorrerIN(Nodo R) {
         String s = "";
         if (R != null) {
             s += RecorrerIN(R.getLigaIzq());
@@ -272,8 +303,6 @@ public class ArbolBinario {
         }
         return n;
     }
-
- 
 
     public int Contarhojas(Nodo R) {
         int s = 0;
