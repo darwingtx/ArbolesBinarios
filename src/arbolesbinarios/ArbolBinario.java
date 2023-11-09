@@ -1,7 +1,5 @@
 package arbolesbinarios;
 
-import javax.swing.JOptionPane;
-
 public class ArbolBinario {
 
     private Nodo Raiz;
@@ -13,7 +11,7 @@ public class ArbolBinario {
         }
     }
 
-    private void FactorB(Nodo R) {
+    public void FactorB(Nodo R) {
         if (R != null) {
             FactorB(R.getLigaDer());
             FactorB(R.getLigaIzq());
@@ -46,14 +44,14 @@ public class ArbolBinario {
         }
         if (c < R.getDato()) {
             R.setLigaIzq(insertarRecursivo(R.getLigaIzq(), c));
-        } else {
+        } else if (c > R.getDato()) {
             R.setLigaDer(insertarRecursivo(R.getLigaDer(), c));
+
         }
         return R;
     }
 
-    public void AVL(Nodo P, Nodo Q, Nodo R) {
-
+    private void AVL(Nodo P, Nodo Q, Nodo R) {
         if ((P.getFb() == 2 && Q.getFb() == 1) || (P.getFb() == -2 && Q.getFb() == -1)) {
             if (P.getFb() == 2 && Q.getFb() == 1) {
                 SimpleRotationRight(P, Q);
@@ -61,15 +59,12 @@ public class ArbolBinario {
                 SimpleRotationLeft(P, Q);
             }
         } else {
-
             if (P.getFb() == -2 && Q.getFb() == 1) {
                 DoubleRotationLeft(P, Q, R);
             } else if (P.getFb() == 2 && Q.getFb() == -1) {
                 DoubleRotationRight(P, Q, R);
             }
-
         }
-
     }
 
     private void SimpleRotationRight(Nodo P, Nodo Q) {
@@ -83,7 +78,7 @@ public class ArbolBinario {
 
             if (s.getLigaDer() == P) {
                 s.setLigaDer(Q);
-                
+
             } else {
                 s.setLigaIzq(Q);
             }
@@ -100,7 +95,6 @@ public class ArbolBinario {
             Q.setLigaIzq(P);
             Raiz = Q;
         } else {
-
             if (s.getLigaDer() == P) {
                 s.setLigaDer(Q);
             } else {
@@ -112,8 +106,7 @@ public class ArbolBinario {
     }
 
     private void DoubleRotationRight(Nodo P, Nodo Q, Nodo R) {
-          Nodo s = Padre(Raiz, P, null);
-
+        Nodo s = Padre(Raiz, P, null);
         P.setLigaIzq(R.getLigaDer());
         R.setLigaDer(P);
         Q.setLigaDer(R.getLigaIzq());
@@ -124,16 +117,13 @@ public class ArbolBinario {
             } else {
                 s.setLigaIzq(R);
             }
-
         } else {
             Raiz = R;
         }
-
     }
 
     private void DoubleRotationLeft(Nodo P, Nodo Q, Nodo R) {
         Nodo s = Padre(Raiz, P, null);
-       
         P.setLigaDer(R.getLigaIzq());
         R.setLigaIzq(P);
         Q.setLigaIzq(R.getLigaDer());
@@ -144,11 +134,9 @@ public class ArbolBinario {
             } else {
                 s.setLigaIzq(R);
             }
-
         } else {
             Raiz = R;
         }
-
     }
 
     public int Altura(Nodo R) {
@@ -165,7 +153,7 @@ public class ArbolBinario {
 
     public int Nivel(Nodo R) {
         Nodo p = null;
-        int deep = 0;
+        int deep = 1;// iniciamos el nivel de la raiz en 1
         if (R != this.getRaiz()) {
             deep = 1 + Nivel(this.Padre(this.Raiz, R, p));
         }
@@ -204,58 +192,99 @@ public class ArbolBinario {
         return s;
     }
 
+    public void Eliminar(Nodo p) {
+        Nodo r = Padre(Raiz, p, null);
+        Nodo q = null;
+        if (p != null) {
+            if (p.getLigaDer() != null) {
+                q = p.getLigaDer();
+                while (q.getLigaIzq() != null) {
+                    q = q.getLigaIzq();
+                }
+            } else if (p.getLigaIzq() != null) {
+                q = p.getLigaIzq();
+                while (q.getLigaDer() != null) {
+                    q = q.getLigaDer();
+                }
+            }
+            Eliminar(q);
+            if (r != null && r.getLigaDer() == p) {
+                r.setLigaDer(q);
+            } else if (r != null && r.getLigaDer() != p) {
+                r.setLigaIzq(q);
+            }
+            {
+            }
+            if (q != null) {
+                q.setLigaDer(p.getLigaDer());
+                q.setLigaIzq(p.getLigaIzq());
+            }
+            if (p == Raiz) {
+                Raiz = q;
+            }
+        }
+    }
+
     public String MostrarPrimosH(Nodo R) {
         Nodo q = null;
         Nodo x = Padre(this.Raiz, R, q);
         Nodo p = Padre(this.Raiz, x, q);
-        String s = "";
-        if (p.getLigaDer() != null && p.getLigaDer() != x) {
-            p = p.getLigaDer();
-            if (p.getLigaIzq() != null) {
-                s += p.getLigaIzq().getDato();
-            }
-            if (p.getLigaDer() != null) {
-                s += p.getLigaDer().getDato();
+        String s = "Los primos hermanos de " + R.getDato() + " son ";
 
-            }
-        } else if (p.getLigaIzq() != null && p.getLigaIzq() != x) {
-            p = p.getLigaIzq();
-            if (p.getLigaIzq() != null) {
-                s += p.getLigaIzq().getDato();
-            }
-            if (p.getLigaDer() != null) {
-                s += p.getLigaDer().getDato();
+        if (x == Raiz) {
+            s = "No tiene primos hermanos";
+        } else {
+            if (p.getLigaDer() != null && p.getLigaDer() != x) {
+                p = p.getLigaDer();
+                if (p.getLigaIzq() != null) {
+                    s += p.getLigaIzq().getDato() + " ";
+                }
+                if (p.getLigaDer() != null) {
+                    s += p.getLigaDer().getDato() + " ";
+                }
+            } else if (p.getLigaIzq() != null && p.getLigaIzq() != x) {
+                p = p.getLigaIzq();
+                if (p.getLigaIzq() != null) {
+                    s += p.getLigaIzq().getDato() + " ";
+                }
+                if (p.getLigaDer() != null) {
+                    s += p.getLigaDer().getDato() + " ";
 
+                }
             }
+
         }
         return s;
     }
 
-    public void MostrarArbol(Nodo R, int space, int alto) {
+    public String MostrarArbol(Nodo R, int space, int alto) {
+        String s = "";
         if (R == null) {
-            return;
+            return s;
         }
         space += alto;
-        MostrarArbol(R.getLigaDer(), space, alto);
-        System.out.println();
+        s = s + MostrarArbol(R.getLigaDer(), space, alto);
         for (int i = alto; i < space; i++) {
-            System.out.print(" ");
+            s = s + " ";
         }
-        System.out.println(R.getDato());
-        System.out.println();
-        MostrarArbol(R.getLigaIzq(), space, alto);
+        if (R == Raiz) {
+            s = s + "[" + R.getDato() + "]\n";
+        } else {
+            s = s + R.getDato() + "\n";
+
+        }
+        s = s + MostrarArbol(R.getLigaIzq(), space, alto);
+        return s;
     }
 
     public String RecorrerPre(Nodo R) {
-        String s = " ";
+        String s = "";
         if (R != null) {
             s += R.getDato();
             s += RecorrerPre(R.getLigaIzq());
             s += RecorrerPre(R.getLigaDer());
         }
-
         return s;
-
     }
 
     public String RecorrerIN(Nodo R) {
@@ -318,12 +347,12 @@ public class ArbolBinario {
     }
 
     public String MostrarAncestros(Nodo R) {
-        String s = "";
+        String s = " ";
         Nodo p = R;
 
         while (p != this.Raiz) {
-            p = this.Padre(this.Raiz, p, p);
-            s += p.getDato();
+            p = this.Padre(this.Raiz, p, null);
+            s += p.getDato() + ", ";
         }
 
         return s;
