@@ -180,7 +180,8 @@ public class Menu {
     
           op = Integer.parseInt(JOptionPane.showInputDialog(null, "1.Preorden\n"
               + "2.Inorder\n"
-              + "3.Posorden\n"));
+              + "3.Posorden\n"
+              + "0.Salir\n"));
           switch (op) {
             case 1:
               JOptionPane.showMessageDialog(null, p.RecorrerPre(p.getRaiz()));
